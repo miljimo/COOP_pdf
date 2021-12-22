@@ -1,0 +1,24 @@
+#!/bin/bash
+PROGRAM_NAME="COOPDocument"
+EXTENSION_OUTPUT=pdf
+OUTPUT_DIRECTORY=./bin
+SOURCE_DIR=./src
+ENTRY_FILE_NAME=${SOURCE_DIR}/main.tex
+OUTPUT_FORMAT_COMMAND="-output-format=${EXTENSION_OUTPUT}"
+OUTPUT_DIR_COMMAND="-output-directory=${OUTPUT_DIRECTORY}" 
+INTERATION_MOD_COMMAND="-interaction=nonstopmode"
+COMPILER_XX_FLAGS="${OUTPUT_FORMAT_COMMAND} ${OUTPUT_DIR_COMMAND} ${INTERATION_MOD_COMMAND}"
+OUTPUT_FILENAME="${OUTPUT_DIRECTORY}/${PROGRAM_NAME}.${EXTENSION_OUTPUT}"
+
+function build(){
+if [ -e "${OUTPUT_FILENAME}" ] ; then
+  echo "Deleting ${OUTPUT_FILENAME}"
+  rm -f ${OUTPUT_FILENAME}
+fi
+ local compile_result=$(pdftex  ${COMPILER_XX_FLAGS} -jobname=${PROGRAM_NAME}  ${ENTRY_FILE_NAME}) 
+
+}
+
+
+
+build 
